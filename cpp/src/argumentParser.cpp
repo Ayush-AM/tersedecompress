@@ -83,5 +83,22 @@ void ArgumentParser::parseArguments(int argc, char **argv)
   }
   std::string outputFileExtension = hasFlag("-b") ? ".bin" : ".txt";
   outputFileExtension += hasFlag("-z") ? ".gz" : "";
-  outputFile = inputFile + outputFileExtension;
+
+  // Handle dataset names (e.g., //'MY.DATA.SET')
+  if (inputFile.size() >= 2 && inputFile.substr(0, 2) == "//")
+  {
+    if (inputFile.back() == '\'')
+    {
+      // If it ends with a quote, insert the extension before the quote
+      outputFile = inputFile.substr(0, inputFile.size() - 1) + outputFileExtension + "'";
+    }
+    else
+    {
+      outputFile = inputFile + outputFileExtension;
+    }
+  }
+  else
+  {
+    outputFile = inputFile + outputFileExtension;
+  }
 }

@@ -118,9 +118,22 @@ class TerseDecompress {
         if (outputFileName != null) {
             return;
         }
+
         String outputFileExtension = textMode ? ".txt" : ".bin";
         outputFileExtension += gzipMode ? ".gz" : "";
-        outputFileName = inputFileName + outputFileExtension;
+
+        // Handle dataset names (e.g., //'MY.DATA.SET')
+        if (inputFileName.startsWith("//")) {
+            if (inputFileName.endsWith("'")) {
+                // If it ends with a quote, insert the extension before the quote
+                outputFileName = inputFileName.substring(0, inputFileName.length() - 1) + outputFileExtension + "'";
+            } else {
+                // Otherwise just append
+                outputFileName = inputFileName + outputFileExtension;
+            }
+        } else {
+            outputFileName = inputFileName + outputFileExtension;
+        }
     }
     public static void main (String args[]) throws Exception {
 
