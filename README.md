@@ -4,6 +4,11 @@ TerseDecompress is a java program that can be used to decompress files
 which have been previously compressed on an IBM Mainframe
 using the TERSE / AMATERSE program (on IBM z/OS or IBM z/VM).
 
+
+## Tech Stack
+
+- **Languages**: Java, C++, Makefile
+
 ## Purpose & benefit ##
 
 As java programs can virtually run on any platform / operating system
